@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to the application!</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<h1>Welcome to Rental Cars Business</h1>
+<div class="rental">
+    <form action="/vehicle-by-type" method="get">
+        <input type="text" name="type" placeholder="Please enter the type to search by">
+        <input class="button button1" type="submit" value="Show the table specified by the type">
+    </form>
+    <form action="/rented-specific-user" method="get">
+        <input type="text" name="CNP" placeholder="Please enter the type CNP of the person you are searching for">
+        <input class="button button1" type="submit" value="Show the table specified by the person's CNP">
+    </form>
+    <button class="button button1" onClick="location.href='http://localhost:9090/rental-orders'" type="button">Show all
+        the vehicles ordered by Manufacturer Year
+    </button>
+    <button class="button button1" onClick="location.href='http://localhost:9090/all-orders'" type="button">Show all the
+        rented vehicles and their loaners
+    </button>
+</div>
+</body>
+</html>

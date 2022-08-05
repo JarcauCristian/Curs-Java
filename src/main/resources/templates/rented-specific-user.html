@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rented vehicles history</title>
+    <link rel="stylesheet" href="css/rental_style.css">
+</head>
+<body>
+<button class="button button1" onClick="location.href='http://localhost:9090'" type="button">Go back!</button>
+<table>
+    <tr>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Kilometers</th>
+        <th>Registration Number</th>
+        <th>Type</th>
+        <th>Brand</th>
+        <th>Manufacture Year</th>
+    </tr>
+    <th:block th:each="order: ${spuser}">
+        <tr>
+            <td th:text="${order.split(' ')[0].trim()}"></td>
+            <td th:text="${order.split(' ')[1].trim()}"></td>
+            <td th:text="${order.split(' ')[2].trim()}"></td>
+            <td th:text="${order.split(' ')[3].trim()}"></td>
+            <td th:text="${order.split(' ')[4].trim()}"></td>
+            <td th:text="${order.split(' ')[5].trim()}"></td>
+            <td th:text="${order.split(' ')[6].trim()}"></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>

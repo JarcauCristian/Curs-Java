@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Vehicles by Type</title>
+    <link rel="stylesheet" href="css/rental_style.css">
+</head>
+<body>
+<button class="button button1" onClick="location.href='http://localhost:9090'" type="button">Go back!</button>
+<table>
+    <tr>
+        <th>Registration Number</th>
+        <th>Type</th>
+        <th>Brand</th>
+        <th>Color</th>
+        <th>Manufacture Year</th>
+    </tr>
+    <th:block th:each="order: ${vbytypes}">
+        <tr>
+            <td th:text="${order.registrationNumber}"></td>
+            <td th:text="${order.type}"></td>
+            <td th:text="${order.brand}"></td>
+            <td th:text="${order.color}"></td>
+            <td th:text="${order.manufactureYear}"></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
