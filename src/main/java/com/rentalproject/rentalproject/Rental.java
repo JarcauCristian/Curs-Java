@@ -41,12 +41,17 @@ public class Rental implements VehicleMethods, RentalMethods {
 
     public void readInputFiles(String fileVehicle, String filePersons)
     {
+        Scanner scanner = new Scanner(System.in);
         try
         {
-            Scanner scanner = new Scanner(new File(fileVehicle));
+            scanner = new Scanner(new File(fileVehicle));
             while (scanner.hasNextLine())
             {
                 String line = scanner.nextLine();
+                if (line.split(",").length != 5)
+                {
+                    throw new FileCoruptError("The data in the file is corupt");
+                }
                 setVehicles(new Vehicle(line.split(",")[0],line.split(",")[1].replace(" ", ""),line.split(",")[2].replace(" ", ""),Integer.parseInt(line.split(",")[3].replace(" ", "")),line.split(",")[4].replace(" ", "")));
             }
             scanner.close();
@@ -54,12 +59,21 @@ public class Rental implements VehicleMethods, RentalMethods {
             while (scanner.hasNextLine())
             {
                 String line = scanner.nextLine();
+                if (line.split(",").length != 5)
+                {
+                    throw new FileCoruptError("The data in the file is corupt");
+                }
                 setPersons(new Person(line.split(",")[0],line.split(",")[1].replace(" ", ""),line.split(",")[2].replace(" ", ""),line.split(",")[3].replace(" ", ""),Integer.parseInt(line.split(",")[4].replace(" ", ""))));
             }
+            scanner.close();
         }
         catch (FileNotFoundException e)
         {
             e.printStackTrace();
+        } catch (FileCoruptError e) {
+            e.printStackTrace();
+        } finally {
+            scanner.close();
         }
     }
 
@@ -67,7 +81,6 @@ public class Rental implements VehicleMethods, RentalMethods {
     public ArrayList<Vehicle> viewVehicleOrderByManufactureYear() {
         ArrayList<Vehicle> list = (ArrayList<Vehicle>) vehicles.stream().sorted(Comparator.comparing(Vehicle::getManufactureYear)).collect(toList());
 
-        list.forEach((n) -> System.out.println(n));
         return list;
     }
 
