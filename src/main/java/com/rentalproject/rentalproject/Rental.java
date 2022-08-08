@@ -50,7 +50,7 @@ public class Rental implements VehicleMethods, RentalMethods {
                 String line = scanner.nextLine();
                 if (line.split(",").length != 5)
                 {
-                    throw new FileCoruptError("The data in the file is corupt");
+                    throw new FileCoruptException("The data in the file is corupt");
                 }
                 setVehicles(new Vehicle(line.split(",")[0],line.split(",")[1].replace(" ", ""),line.split(",")[2].replace(" ", ""),Integer.parseInt(line.split(",")[3].replace(" ", "")),line.split(",")[4].replace(" ", "")));
             }
@@ -61,7 +61,7 @@ public class Rental implements VehicleMethods, RentalMethods {
                 String line = scanner.nextLine();
                 if (line.split(",").length != 5)
                 {
-                    throw new FileCoruptError("The data in the file is corupt");
+                    throw new FileCoruptException("The data in the file is corupt");
                 }
                 setPersons(new Person(line.split(",")[0],line.split(",")[1].replace(" ", ""),line.split(",")[2].replace(" ", ""),line.split(",")[3].replace(" ", ""),Integer.parseInt(line.split(",")[4].replace(" ", ""))));
             }
@@ -70,7 +70,7 @@ public class Rental implements VehicleMethods, RentalMethods {
         catch (FileNotFoundException e)
         {
             e.printStackTrace();
-        } catch (FileCoruptError e) {
+        } catch (FileCoruptException e) {
             e.printStackTrace();
         } finally {
             scanner.close();
