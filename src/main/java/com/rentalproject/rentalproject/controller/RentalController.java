@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.SQLException;
+
 
 @Controller
 public class RentalController {
@@ -23,7 +25,11 @@ public class RentalController {
     @GetMapping("/all-orders")
     public String all_orders(Model model)
     {
-        model.addAttribute("allvandp",rental.showHistoryOfRentalVehiclesAndTheirClient());
+        try {
+            model.addAttribute("allvandp",rental.showHistoryOfRentalVehiclesAndTheirClient());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return "all-rented-vehicles";
     }
 
@@ -39,7 +45,11 @@ public class RentalController {
     public String rented_specific_user(@RequestParam(required = false) String CNP, Model model)
     {
         rental.readInputFiles("vehicles.txt", "persoane.txt");
-        model.addAttribute("spuser", rental.viewTheRentedVehiclesOfASpecificUser(CNP));
+        try {
+            model.addAttribute("spuser", rental.viewTheRentedVehiclesOfASpecificUser(CNP));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return "rented-specific-user";
     }
 

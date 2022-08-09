@@ -90,7 +90,7 @@ public class Rental implements VehicleMethods, RentalMethods {
     }
 
     @Override
-    public ArrayList<String> showHistoryOfRentalVehiclesAndTheirClient() {
+    public ArrayList<String> showHistoryOfRentalVehiclesAndTheirClient() throws SQLException{
         String result = "";
         ArrayList<String> dbresult = new ArrayList<>();
         if (DBClass.connection()) {
@@ -118,7 +118,7 @@ public class Rental implements VehicleMethods, RentalMethods {
     }
 
     @Override
-    public boolean rentAVehicle() {
+    public boolean rentAVehicle() throws SQLException{
         if (DBClass.connection())
         {
             Statement statement;
@@ -160,7 +160,7 @@ public class Rental implements VehicleMethods, RentalMethods {
     }
 
     @Override
-    public ArrayList<String> viewTheRentedVehiclesOfASpecificUser(String CNP) {
+    public ArrayList<String> viewTheRentedVehiclesOfASpecificUser(String CNP) throws SQLException {
         ArrayList<String> result = new ArrayList<>();
         if (DBClass.connection())
         {

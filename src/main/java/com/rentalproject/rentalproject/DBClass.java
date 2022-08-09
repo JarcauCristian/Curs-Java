@@ -7,8 +7,7 @@ import java.util.Scanner;
 
 public class DBClass {
     public static Connection conn;
-    public static boolean connection()
-    {
+    public static boolean connection() throws SQLException {
         try {
             try(Scanner cin = new Scanner(new File("file.conn"))) {
                 String line;
@@ -23,9 +22,9 @@ public class DBClass {
                 e.printStackTrace();
             }
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             e.printStackTrace();
+            conn.close();
         }
         return true;
     }
