@@ -86,7 +86,7 @@ public class Rental implements VehicleMethods, RentalMethods {
 
     @Override
     public ArrayList<Vehicle> searchAVehicleByType(String type) {
-       return (ArrayList<Vehicle>) vehicles.stream().filter(d -> d.getType() == Type.valueOf(type)).collect(toList());
+       return (ArrayList<Vehicle>) vehicles.stream().filter(d -> d.getType() == Type.valueOf(type.toUpperCase())).collect(toList());
     }
 
     @Override
@@ -104,13 +104,25 @@ public class Rental implements VehicleMethods, RentalMethods {
                             resultSet.getString("firstname")  + " " +  resultSet.getString("lastname")  + " " +  resultSet.getDate("dateofbirth")  + " " +  resultSet.getString("gender")  + " " +  resultSet.getInt("driverlincese");
                     dbresult.add(result);
                 }
+                try {
+                    if (resultSet != null)
+                        resultSet.close();
+                    if (callable != null)
+                        callable.close();
+                }
+                catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             } finally {
                 try {
-                    DBClass.conn.close();
+                    if (DBClass.conn != null)
+                        DBClass.conn.close();
+
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         }
@@ -151,7 +163,12 @@ public class Rental implements VehicleMethods, RentalMethods {
                 }
             }
             try {
-                DBClass.conn.close();
+                if (statement != null)
+                {
+                    statement.close();
+                }
+                if (DBClass.conn != null)
+                    DBClass.conn.close();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -179,12 +196,23 @@ public class Rental implements VehicleMethods, RentalMethods {
                     result.add(resultSet.getDate("startdate") + " " + resultSet.getDate("enddate") + " " + resultSet.getDouble("kilometers") + " " + resultSet.getString("registationnumber") + " " + resultSet.getString("type") + " " + resultSet.getString("brand") + " " + resultSet.getInt("manufactureryear"));
                     System.out.println();
                 }
+                try {
+                    if (statement != null)
+                        statement.close();
+                    if (resultSet != null)
+                        resultSet.close();
+                }
+                catch (SQLException e)
+                {
+                    e.printStackTrace();
+                }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
             finally {
                 try {
-                    DBClass.conn.close();
+                    if (DBClass.conn != null)
+                        DBClass.conn.close();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
